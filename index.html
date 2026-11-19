@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Menú de los cuatro simuladores de Física II de CampoLab.">
+<title>Laboratorio de Física II | Menú de unidades</title>
+<style>
+:root { color-scheme: dark; font-family: system-ui, sans-serif; color: #f4f8ff; background: #071323; }
+* { box-sizing: border-box; }
+body { margin: 0; background: radial-gradient(ellipse at 85% 0%, #183553, transparent 55%); }
+header, main, footer { width: min(70rem, calc(100% - 2.5rem)); margin-inline: auto; }
+header { padding-block: 2rem 1rem; border-bottom: 1px solid #3a5069; color: #b7f4ed; font-weight: 650; }
+.intro { padding-block: clamp(2rem, 6vw, 4.5rem) 2rem; }
+h1 { font-size: clamp(2.4rem, 7vw, 5rem); line-height: 1.05; margin: 0; letter-spacing: -.055em; }
+p { color: #c4d3e5; line-height: 1.55; }
+ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
+li { display: flex; }
+.card { --accent: #82eadc; display: flex; flex: 1; flex-direction: column; padding: clamp(1.15rem, 3vw, 2rem); border: 1px solid #425771; border-top: 3px solid var(--accent); border-radius: 1rem; background: #111f34; color: inherit; text-decoration: none; }
+li:nth-child(2) .card { --accent: #bcb3ff; }
+li:nth-child(3) .card { --accent: #ffd58d; }
+li:nth-child(4) .card { --accent: #a8d9ff; }
+.card:hover, .card:focus-visible { background: #1a2d46; border-color: var(--accent); }
+.card:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.unit, .action { color: var(--accent); font-weight: 650; }
+h2 { margin: .6rem 0 0; font-size: clamp(1.25rem, 3vw, 1.65rem); letter-spacing: -.025em; }
+.card p { margin-block: .5rem 1.35rem; }
+.action { margin-top: auto; text-decoration: underline; text-underline-offset: .25em; }
+footer { padding-block: 1.5rem 2rem; }
+@media (max-width: 40rem) { ul { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>CampoLab · Física II</header>
+<main>
+  <div class="intro">
+    <h1>Laboratorio de Física II</h1>
+    <p>Elige una unidad para abrir su simulador en una pestaña nueva.</p>
+  </div>
+  <nav aria-label="Menú general de unidades">
+    <ul>
+      <li>
+        <a class="card" href="https://jeffersonsnayderperez20-lgtm.github.io/Fisica-II-Unidad-1/" target="_blank" rel="noopener">
+          <span class="unit">Unidad I</span>
+          <h2>Electricidad, campo eléctrico y potencial</h2>
+          <p>Combina cargas y observa el campo y las superficies equipotenciales.</p>
+          <span class="action">Abrir simulador</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="https://jeffersonsnayderperez20-lgtm.github.io/Fisica-II-Unidad-2/" target="_blank" rel="noopener">
+          <span class="unit">Unidad II</span>
+          <h2>Capacitores y dieléctricos</h2>
+          <p>Cambia la geometría y el material para explorar la capacitancia.</p>
+          <span class="action">Abrir simulador</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="https://jeffersonsnayderperez20-lgtm.github.io/Fisica-II-Unidad-3/" target="_blank" rel="noopener">
+          <span class="unit">Unidad III</span>
+          <h2>Corriente eléctrica y ley de Ohm</h2>
+          <p>Construye circuitos en serie y en paralelo y compara sus resultados.</p>
+          <span class="action">Abrir simulador</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="https://jeffersonsnayderperez20-lgtm.github.io/Fisica-II-Unidad-4/" target="_blank" rel="noopener">
+          <span class="unit">Unidad IV</span>
+          <h2>Fuerza y campo magnético</h2>
+          <p>Visualiza campos magnéticos y experimenta con la fuerza de Lorentz.</p>
+          <span class="action">Abrir simulador</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</main>
+<footer><p>Física II · Unidades I–IV</p></footer>
+</body>
+</html>
