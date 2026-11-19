@@ -31,7 +31,7 @@ footer { padding-block: 1.5rem 2rem; }
 
 [hidden] { display: none !important; }
 .lab-bar { position: sticky; top: 0; z-index: 1; background: #071323; box-shadow: 0 0 0 100vmax #071323; clip-path: inset(0 -100vmax); padding-block: .85rem; display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; }
-.lab-bar a, .external { color: #b7f4ed; text-underline-offset: .2em; }
+.lab-bar a { color: #b7f4ed; text-underline-offset: .2em; }
 .back { display: inline-block; border: 1px solid #82eadc; padding: .5rem .8rem; border-radius: .5rem; font-weight: 700; }
 .lab-intro { border-left: 4px solid var(--accent); margin-block: 1.5rem; padding: 1rem clamp(1rem,4vw,2rem); background: #111f34; border-radius: .65rem; }
 .lab-intro h1 { font-size: clamp(1.75rem,5vw,3.1rem); margin-block: .35rem; }
@@ -103,7 +103,7 @@ a:focus-visible { outline: 3px solid #82eadc; outline-offset: 4px; }
 <main class="lab-view" id="lab" hidden>
   <nav class="lab-bar" aria-label="Navegación de la unidad">
     <a class="back" href="?">Volver al menú</a>
-    <a class="external" id="original" target="_blank" rel="noopener">Abrir simulador en otra pestaña</a>
+
   </nav>
   <section class="lab-intro" aria-labelledby="lab-title">
     <span class="unit" id="lab-unit"></span>
@@ -114,7 +114,7 @@ a:focus-visible { outline: 3px solid #82eadc; outline-offset: 4px; }
     <aside class="practice" aria-labelledby="practice-title">
       <h2 id="practice-title">Ejercicios guiados</h2>
       <div id="exercises"></div>
-      <p><a class="external" id="reference-unit" target="_blank" rel="noopener">Abrir unidad de referencia</a></p>
+
     </aside>
     <iframe id="simulator" allow="fullscreen" title="Simulador de Física II"></iframe>
   </div>
@@ -169,7 +169,6 @@ a:focus-visible { outline: 3px solid #82eadc; outline-offset: 4px; }
     document.getElementById("lab-title").textContent = title;
     document.getElementById("lab-unit").textContent = label;
     document.getElementById("lab-guide").textContent = guide;
-    document.getElementById("original").href = source;
     const simulator = document.getElementById("simulator");
     simulator.title = label + " · " + title;
     simulator.src = source;
@@ -177,8 +176,6 @@ a:focus-visible { outline: 3px solid #82eadc; outline-offset: 4px; }
       document.getElementById(id).hidden = true;
     }
 
-    const reference = document.getElementById("reference-unit");
-    reference.href = "https://alexander777-cpu.github.io/Fisica_Producto_Final_Unidad_IV/unidad_" + label.split(" ").at(-1) + ".html";
     const practice = document.getElementById("exercises");
     exercises[unitNumber].forEach(([name, steps, answer], index) => {
       const exercise = document.createElement("details");
