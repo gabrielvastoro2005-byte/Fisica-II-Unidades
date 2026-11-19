@@ -39,6 +39,19 @@ footer { padding-block: 1.5rem 2rem; }
 .lab-view { width: min(100rem, calc(100% - 1.25rem)); padding-bottom: 1.5rem; }
 iframe { display: block; width: 100%; height: 83vh; min-height: 28rem; border: 1px solid #425771; border-radius: .8rem; background: #111f34; }
 a:focus-visible { outline: 3px solid #82eadc; outline-offset: 4px; }
+
+.lab-grid { display: grid; grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr); gap: 1rem; align-items: start; }
+.practice { background: #111f34; border: 1px solid #425771; border-radius: .8rem; padding: 1rem; }
+.practice > h2 { margin: 0 0 .65rem; }
+.practice details { border-top: 1px solid #425771; padding-block: .75rem; }
+.practice summary { cursor: pointer; font-weight: 700; }
+.practice summary:focus-visible { outline: 2px solid var(--accent); outline-offset: .25rem; }
+.practice ol { padding-left: 1.4rem; color: #d3e0f0; line-height: 1.55; }
+.practice ol li { display: list-item; margin-bottom: .35rem; }
+.practice label { display: grid; gap: .25rem; margin-bottom: .7rem; }
+.practice input, .practice select { font: inherit; padding: .4rem; width: 100%; }
+.practice output { display: block; line-height: 1.6; color: var(--accent); }
+@media (max-width: 62rem) { .lab-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -97,7 +110,14 @@ a:focus-visible { outline: 3px solid #82eadc; outline-offset: 4px; }
     <h1 id="lab-title"></h1>
     <p id="lab-guide"></p>
   </section>
-  <iframe id="simulator" allow="fullscreen" title="Simulador de Física II"></iframe>
+  <div class="lab-grid">
+    <aside class="practice" aria-labelledby="practice-title">
+      <h2 id="practice-title">Ejercicios guiados</h2>
+      <div id="exercises"></div>
+      <p><a class="external" id="reference-unit" target="_blank" rel="noopener">Abrir unidad de referencia</a></p>
+    </aside>
+    <iframe id="simulator" allow="fullscreen" title="Simulador de Física II"></iframe>
+  </div>
 </main>
 <script>
   const units = {
@@ -106,6 +126,37 @@ a:focus-visible { outline: 3px solid #82eadc; outline-offset: 4px; }
     "3": ["#ffd58d", "Compara los circuitos en serie y en paralelo con la misma fuente. Observa la resistencia equivalente y la corriente total."],
     "4": ["#a8d9ff", "Explora el campo de un conductor, invierte el sentido de la corriente y observa cómo cambia la dirección del campo."]
   };
+
+  const exercises = {
+    "1": [
+      ["Campo y potencial de un dipolo", ["Selecciona «Dipolo» en Ejemplo.", "Fija el punto P en (0, 0, 0) y activa las líneas de campo.", "Anota el potencial y la magnitud del campo en P."], "Con cargas opuestas de igual magnitud y a la misma distancia de P, el potencial es cero y el campo apunta de la carga positiva a la negativa."],
+      ["Trayectoria de una partícula", ["Abre «Trayectoria».", "Ejecuta dos ensayos con las mismas condiciones iniciales e invierte solo el signo de la carga de prueba.", "Compara el sentido de la desviación inicial."], "Al invertir la carga, la fuerza eléctrica inicial cambia de sentido porque F = qE."]
+    ],
+    "2": [
+      ["Separación entre placas", ["Conecta la fuente. Fija A = 200 cm², εᵣ = 2 y V = 12 V.", "Compara d = 2 mm con d = 4 mm.", "Anota C y Q en ambos ensayos."], "Al duplicar d, C pasa de 0,177 a 0,0885 nF y Q cae de 2,125 a 1,062 nC."],
+      ["Dieléctrico con carga fija", ["Fija εᵣ = 2 y desconecta la fuente.", "Cambia εᵣ de 2 a 4 sin modificar la geometría.", "Compara la carga, la capacitancia y el voltaje."], "La carga se conserva, la capacitancia se duplica y el voltaje se reduce a la mitad."]
+    ],
+    "3": [
+      ["1. Corriente a escala microscópica", ["Usa el modelo de deriva de abajo con cobre, E = 0,1 V/m y d = 1 mm.", "Duplica el diámetro sin cambiar E ni el material.", "Compara la velocidad de deriva y la corriente."], "La velocidad de deriva permanece constante y la corriente se cuadruplica porque el área aumenta por un factor de cuatro."],
+      ["2. Ley de Ohm y potencia", ["En «Laboratorio de la ley de Ohm», fija la resistencia en 100 Ω.", "Cambia el voltaje de 6 a 12 V y compara la corriente.", "Calcula la potencia en ambos casos con P = VI."], "La corriente pasa de 0,06 A a 0,12 A. La potencia pasa de 0,36 W a 1,44 W."],
+      ["3. Circuitos de corriente continua", ["Fija la fuente en 12 V y arma dos resistencias de 100 Ω en serie.", "Arma después dos ramas de 100 Ω en paralelo y compara la resistencia equivalente y la corriente de la fuente.", "Explora la opción «Mixto» y verifica el reparto de corriente en un bloque."], "Serie: 200 Ω y 0,06 A. Paralelo: 50 Ω y 0,24 A, con 0,12 A en cada rama. En cada nodo se conserva la corriente."]
+    ],
+    "4": [
+      ["Campo de un conductor rectilíneo", ["En «Campo», selecciona «Conductor rectilíneo».", "Conserva la corriente y compara la magnitud del campo en dos puntos, uno al doble de distancia perpendicular del hilo.", "Invierte el signo de la corriente y observa los vectores."], "Al duplicar la distancia, la magnitud se reduce a la mitad. Al invertir la corriente, el campo cambia de sentido."],
+      ["Fuerza de Lorentz", ["Abre «Fuerza de Lorentz» y deja el campo eléctrico en cero.", "Compara dos ensayos con la misma velocidad inicial y un campo magnético perpendicular a ella.", "Invierte el signo de la carga y compara el sentido de giro."], "Las partículas con cargas opuestas giran en sentidos opuestos. El campo magnético por sí solo conserva la rapidez."]
+    ]
+  };
+
+  const driftModel = `
+    <p>Modelo óhmico con resistividad a temperatura ambiente. Se muestran magnitudes de deriva y densidad de corriente.</p>
+    <label>Material <select name="material">
+      <option value="copper">Cobre</option><option value="silver">Plata</option><option value="aluminum">Aluminio</option>
+    </select></label>
+    <label>Campo eléctrico (V/m) <input name="field" type="number" min="0" max="10" step="0.01" value="0.1" required></label>
+    <label>Diámetro (mm) <input name="diameter" type="number" min="0.1" max="10" step="0.1" value="1" required></label>
+    <output aria-live="polite"></output>
+  `;
+
   const unitNumber = new URLSearchParams(window.location.search).get("unidad");
   if (Object.hasOwn(units, unitNumber)) {
     const card = document.querySelector('[data-unit="' + unitNumber + '"]');
@@ -125,6 +176,54 @@ a:focus-visible { outline: 3px solid #82eadc; outline-offset: 4px; }
     for (const id of ["menu-brand", "menu", "menu-footer"]) {
       document.getElementById(id).hidden = true;
     }
+
+    const reference = document.getElementById("reference-unit");
+    reference.href = "https://alexander777-cpu.github.io/Fisica_Producto_Final_Unidad_IV/unidad_" + label.split(" ").at(-1) + ".html";
+    const practice = document.getElementById("exercises");
+    exercises[unitNumber].forEach(([name, steps, answer], index) => {
+      const exercise = document.createElement("details");
+      exercise.open = index === 0;
+      const summary = document.createElement("summary");
+      summary.textContent = name;
+      const list = document.createElement("ol");
+      for (const step of steps) {
+        const item = document.createElement("li");
+        item.textContent = step;
+        list.append(item);
+      }
+      exercise.append(summary, list);
+      if (unitNumber === "3" && index === 0) {
+        const form = document.createElement("form");
+        form.innerHTML = driftModel;
+        form.addEventListener("submit", event => event.preventDefault());
+        const materials = { copper: [1.68e-8, 8.5e28], silver: [1.59e-8, 5.8e28], aluminum: [2.65e-8, 6e28] };
+        const result = form.querySelector("output");
+        const format = new Intl.NumberFormat("es-PE", { maximumSignificantDigits: 4 });
+        function calculateDrift() {
+          if (!form.checkValidity()) {
+            result.textContent = "Introduce un campo entre 0 y 10 V/m y un diámetro entre 0,1 y 10 mm.";
+            return;
+          }
+          const [resistivity, density] = materials[form.elements.material.value];
+          const currentDensity = form.elements.field.valueAsNumber / resistivity;
+          const radius = form.elements.diameter.valueAsNumber / 2000;
+          const current = currentDensity * Math.PI * radius ** 2;
+          const drift = currentDensity / (density * 1.602176634e-19);
+          result.textContent = "Deriva: " + format.format(drift * 1000) + " mm/s · Densidad: " + format.format(currentDensity / 1e6) + " MA/m² · Corriente: " + format.format(current) + " A";
+        }
+        form.addEventListener("input", calculateDrift);
+        calculateDrift();
+        exercise.append(form);
+      }
+      const solution = document.createElement("details");
+      const solutionLabel = document.createElement("summary");
+      solutionLabel.textContent = "Ver resultado esperado";
+      const explanation = document.createElement("p");
+      explanation.textContent = answer;
+      solution.append(solutionLabel, explanation);
+      exercise.append(solution);
+      practice.append(exercise);
+    });
     lab.hidden = false;
     document.title = label + " | " + title;
   }
